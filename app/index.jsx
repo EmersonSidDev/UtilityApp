@@ -1,6 +1,5 @@
 // app/index.jsx
 import { router } from 'expo-router';
-import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 
@@ -32,6 +31,16 @@ export default function Index() {
             }
           >
             🚀 Conversor de Velocidade
+          </Button>
+          {/* Botão 2 - Conversor de Tempo */}
+          <Button
+            mode="contained"
+            style={[styles.button, { marginTop: 12 }]}
+            onPress={() =>
+              router.push('/view/conversor_tempo')
+            }
+          >
+            ⏳ Conversor de Tempo
           </Button>
         </Card.Content>
       </Card>
