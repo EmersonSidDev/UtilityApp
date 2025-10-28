@@ -94,5 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 6,
     paddingHorizontal: 12,
+    marginBottom: 4,
+    width: '100%',
   },
 });
