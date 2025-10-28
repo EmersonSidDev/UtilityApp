@@ -40,7 +40,7 @@ export default function Index() {
               router.push('/view/conversorMedidaListView')
             }
           >
-            🚀 Conversor de Medida
+            📏 Conversor de Medida
           </Button>
         </Card.Content>
       </Card>
