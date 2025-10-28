@@ -33,6 +33,15 @@ export default function Index() {
           >
             🚀 Conversor de Velocidade
           </Button>
+          <Button
+            mode="contained"
+            style={styles.button}
+            onPress={() =>
+              router.push('/view/conversorMedidaListView')
+            }
+          >
+            🚀 Conversor de Medida
+          </Button>
         </Card.Content>
       </Card>
     </View>
