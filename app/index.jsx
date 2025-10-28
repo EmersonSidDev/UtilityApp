@@ -33,6 +33,15 @@ export default function Index() {
           >
             🚀 Conversor de Velocidade
           </Button>
+          <Button
+            mode="contained"
+            style={styles.button}
+            onPress={() =>
+              router.push('/view/conversorMedidaListView')
+            }
+          >
+            📏 Conversor de Medida
+          </Button>
         </Card.Content>
       </Card>
     </View>
@@ -85,5 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 6,
     paddingHorizontal: 12,
+    marginBottom: 4,
+    width: '100%',
   },
 });

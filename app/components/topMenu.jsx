@@ -30,7 +30,15 @@ export default function TopMenu() {
           }}
           title="⚙️ Conversor de Velocidade"
         />
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
+            router.push('/view/conversorMedidaListView');
+          }}
+          title="📏 Conversor de Medida"
+        />
       </Menu>
+        
     </Appbar.Header>
   );
 }
