@@ -27,10 +27,27 @@ export default function ConversorVelocidadeListView() {
   }, []);
 
   useFocusEffect(
-    useCallback(() => {
-      carregar();
-    }, [carregar])
-  );
+  useCallback(() => {
+    let isActive = true;
+
+    const fetch = async () => {
+      setLoading(true);
+      try {
+        const lista = await ConversorVelocidadeService.listar();
+        if (isActive) setDados(lista);
+      } catch (err) {
+        Toast.show({ type: 'error', text1: 'Erro ao carregar', text2: String(err?.message ?? err) });
+      } finally {
+        if (isActive) setLoading(false);
+      }
+    };
+
+    fetch();
+
+    return () => { isActive = false };
+  }, [])
+);
+
 
   async function removerItem(id) {
     try {
