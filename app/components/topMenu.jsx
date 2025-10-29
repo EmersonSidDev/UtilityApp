@@ -33,9 +33,25 @@ export default function TopMenu() {
         <Menu.Item
           onPress={() => {
             closeMenu();
+            router.push('/view/conversorPesoListView');
+          }}
+          title="⚖️ Conversor de Peso"
+          titleStyle={{ color: 'white' }}
+        />
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
             router.push('/view/conversorMedidaListView');
           }}
           title="📏 Conversor de Medida"
+        />
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
+            router.push('/view/cronometroView');
+          }}
+          title="⏱️ Cronômetro"
+          titleStyle={{ color: 'white' }}
         />
       </Menu>
         
