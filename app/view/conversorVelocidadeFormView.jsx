@@ -35,59 +35,62 @@ export default function ConversorVelocidadeFormView() {
     }
   }
 
-  function toMs(v, from) {
-    const n = Number(v);
-    if (from === 'km/h') return n / 3.6;
-    if (from === 'mph') return n * 0.44704;
-    return n;
-  }
+  async function calcular() {
+  try {
+    const entity = new (await import('../entities/ConversaoVelocidadeEntity')).default({
+      valor,
+      unidadeOrigem,
+      unidadeDestino,
+    });
 
-  function fromMs(v, to) {
-    if (to === 'km/h') return v * 3.6;
-    if (to === 'mph') return v / 0.44704;
-    return v;
+    const res = await ConversorVelocidadeService.calcular(entity);
+    setResultado(res);
+    Toast.show({
+      type: 'success',
+      text1: 'Conversão realizada',
+      text2: `${entity.valor} ${entity.unidadeOrigem} → ${res.toFixed(2)} ${entity.unidadeDestino}`,
+    });
+    return res;
+  } catch (err) {
+    Toast.show({ type: 'error', text1: 'Erro', text2: String(err.message || err) });
+    setResultado(null);
+    return null;
   }
+}
 
-  function calcular() {
-    try {
-      const v = Number(valor);
-      if (isNaN(v)) throw new Error('Valor inválido');
-      if (unidadeOrigem === unidadeDestino) throw new Error('Unidades devem ser diferentes');
-      const ms = toMs(v, unidadeOrigem);
-      const res = fromMs(ms, unidadeDestino);
-      setResultado(res);
-      Toast.show({ type: 'success', text1: 'Conversão realizada', text2: `${v} ${unidadeOrigem} → ${res.toFixed(2)} ${unidadeDestino}` });
-      return res;
-    } catch (err) {
-      Toast.show({ type: 'error', text1: 'Erro', text2: String(err.message || err) });
-      setResultado(null);
-      return null;
-    }
-  }
 
   async function salvar() {
-    setLoading(true);
-    try {
-      const res = calcular();
-      if (res === null) throw new Error('Não foi possível calcular');
-      const dto = {
-        id: id ?? undefined,
-        valor: Number(valor),
-        unidadeOrigem,
-        unidadeDestino,
-        resultado: Number(res),
-        data: new Date().toISOString().slice(0, 10),
-      };
-      if (id) await ConversorVelocidadeService.atualizar(dto);
-      else await ConversorVelocidadeService.criar(dto);
-      Toast.show({ type: 'success', text1: 'Salvo com sucesso!' });
-      router.back();
-    } catch (err) {
-      Toast.show({ type: 'error', text1: 'Erro ao salvar', text2: String(err?.message ?? err) });
-    } finally {
-      setLoading(false);
-    }
+  setLoading(true);
+  try {
+    const res = await calcular(); 
+
+    if (res === null) throw new Error('Não foi possível calcular');
+
+    const dto = {
+      id: id ?? undefined,
+      valor: Number(valor),
+      unidadeOrigem,
+      unidadeDestino,
+      resultado: Number(res),
+      data: new Date().toISOString().slice(0, 10),
+    };
+
+    const { conversao } = id
+      ? await ConversorVelocidadeService.atualizar(dto)
+      : await ConversorVelocidadeService.criar(dto);
+
+    console.log('Salvo:', conversao);
+
+    Toast.show({ type: 'success', text1: 'Salvo com sucesso!' });
+
+    router.push('/view/conversorVelocidadeListView');
+  } catch (err) {
+    Toast.show({ type: 'error', text1: 'Erro ao salvar', text2: String(err?.message ?? err) });
+  } finally {
+    setLoading(false);
   }
+}
+
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -135,7 +138,7 @@ export default function ConversorVelocidadeFormView() {
           </Text>
 
           <View style={styles.actions}>
-            <Button mode="outlined" onPress={() => router.back()} style={styles.actionBtn}>Cancelar</Button>
+            <Button mode="outlined" onPress={() => router.push('/view/conversorVelocidadeListView')} style={styles.actionBtn}>Cancelar</Button>
             <Button mode="contained" onPress={salvar} loading={loading} style={styles.actionBtn}>
               Salvar
             </Button>

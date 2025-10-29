@@ -6,6 +6,48 @@ const STORAGE_KEY = 'conversoes_velocidade';
 let mem = [];
 
 export default class ConversorVelocidadeService {
+  // --- 🧠 NOVAS FUNÇÕES DE CONVERSÃO ---
+  static toMs(v, from) {
+    const n = Number(v);
+    if (Number.isNaN(n)) throw new Error('Valor inválido');
+    switch (from) {
+      case 'km/h': return n / 3.6;
+      case 'mph': return n * 0.44704;
+      default: return n;
+    }
+  }
+
+  static fromMs(v, to) {
+    const n = Number(v);
+    if (Number.isNaN(n)) throw new Error('Valor inválido');
+    switch (to) {
+      case 'km/h': return n * 3.6;
+      case 'mph': return n / 0.44704;
+      default: return n;
+    }
+  }
+
+  /**
+   * Calcula o resultado com base em uma entidade
+   * @param {ConversaoVelocidadeEntity} entity
+   * @returns {number} resultado calculado
+   */
+  static calcular(entity) {
+    if (!(entity instanceof ConversaoVelocidadeEntity)) {
+      throw new Error('Entidade inválida');
+    }
+
+    const v = Number(entity.valor);
+    if (isNaN(v)) throw new Error('Valor inválido');
+    if (entity.unidadeOrigem === entity.unidadeDestino) {
+      throw new Error('Unidades devem ser diferentes');
+    }
+
+    const ms = this.toMs(v, entity.unidadeOrigem);
+    const res = this.fromMs(ms, entity.unidadeDestino);
+    return Number(res.toFixed(2));
+  }
+
   // Carrega dados persistidos (mantém mem atualizada)
   static async carregar() {
     try {
@@ -32,7 +74,7 @@ export default class ConversorVelocidadeService {
   }
 
   static async listar() {
-    if (!mem.length) await this.carregar();
+    await this.carregar();
     return mem.map(this.toEntity);
   }
 
