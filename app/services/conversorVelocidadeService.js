@@ -6,7 +6,7 @@ const STORAGE_KEY = 'conversoes_velocidade';
 let mem = [];
 
 export default class ConversorVelocidadeService {
-  // --- 🧠 NOVAS FUNÇÕES DE CONVERSÃO ---
+  // --- FUNÇÕES DE CONVERSÃO ---
   static toMs(v, from) {
     const n = Number(v);
     if (Number.isNaN(n)) throw new Error('Valor inválido');
