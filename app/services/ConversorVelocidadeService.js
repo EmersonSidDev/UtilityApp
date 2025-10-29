@@ -1,6 +1,6 @@
 // app/services/ConversorVelocidadeService.js
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ConversaoVelocidadeEntity from '../entities/ConversaoVelocidadeEntity';
+import ConversaoVelocidadeEntity from '../view/conversorVelocidadeFormView';
 
 const STORAGE_KEY = 'conversoes_velocidade';
 let mem = [];
