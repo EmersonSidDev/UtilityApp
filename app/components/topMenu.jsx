@@ -38,6 +38,14 @@ export default function TopMenu() {
           title="🚗 Conversor de Velocidade"
           titleStyle={{ color: 'white' }}
         />
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
+            router.push('/view/cronometroView');
+          }}
+          title="⏱️ Cronômetro"
+          titleStyle={{ color: 'white' }}
+        />
       <Menu.Item
   onPress={() => {
     closeMenu();
@@ -45,6 +53,7 @@ export default function TopMenu() {
   }}
   title="⚖️ Conversor de Peso"
   titleStyle={{ color: 'white' }}
+  
 />      </Menu>
     </Appbar.Header>
   );

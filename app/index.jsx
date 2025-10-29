@@ -42,6 +42,16 @@ export default function Index() {
           >
             ⚖️ Conversor de Peso
           </Button>
+
+          <Button
+            mode="contained"
+            style={[styles.button, styles.weightButton]}
+            onPress={() => router.push('/view/cronometroView')}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.buttonLabel}
+          >
+            Cronômetro
+          </Button>
         </Card.Content>
       </Card>
     </View>
