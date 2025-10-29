@@ -1,32 +1,36 @@
-// app/view/conversorVelocidadeListView.jsx
-import { useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
-import ConversorVelocidadeService from '../services/conversorVelocidadeService';
+import ConversorVelocidadeService from '../services/ConversorVelocidadeService';
 
 export default function ConversorVelocidadeListView() {
   const router = useRouter();
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  async function carregar() {
+  const carregar = useCallback(async () => {
     setLoading(true);
     try {
       const lista = await ConversorVelocidadeService.listar();
       setDados(lista || []);
     } catch (err) {
-      Toast.show({ type: 'error', text1: 'Erro ao carregar', text2: String(err?.message ?? err) });
+      Toast.show({
+        type: 'error',
+        text1: 'Erro ao carregar',
+        text2: String(err?.message ?? err),
+      });
     } finally {
       setLoading(false);
     }
-  }
-
-  useEffect(() => {
-    // carrega na montagem
-    carregar();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      carregar();
+    }, [carregar])
+  );
 
   async function removerItem(id) {
     try {
@@ -38,14 +42,20 @@ export default function ConversorVelocidadeListView() {
         Toast.show({ type: 'error', text1: 'Item não encontrado' });
       }
     } catch (err) {
-      Toast.show({ type: 'error', text1: 'Erro ao remover', text2: String(err?.message ?? err) });
+      Toast.show({
+        type: 'error',
+        text1: 'Erro ao remover',
+        text2: String(err?.message ?? err),
+      });
     }
   }
 
   function renderItem({ item }) {
     return (
       <Card style={styles.card}>
-        <Card.Title title={`${item.valor} ${item.unidadeOrigem} → ${item.resultado} ${item.unidadeDestino}`} />
+        <Card.Title
+          title={`${Number(item.valor).toFixed(2)} ${item.unidadeOrigem} → ${Number(item.resultado).toFixed(2)} ${item.unidadeDestino}`}
+        />
         <Card.Content>
           <Text>Data: {item.data}</Text>
         </Card.Content>
@@ -73,7 +83,9 @@ export default function ConversorVelocidadeListView() {
       <Button
         mode="contained"
         style={styles.btnAdd}
-        onPress={() => router.push({ pathname: '/view/conversorVelocidadeFormView' })}
+        onPress={() =>
+          router.push({ pathname: '/view/conversorVelocidadeFormView' })
+        }
       >
         Nova Conversão
       </Button>
@@ -84,7 +96,10 @@ export default function ConversorVelocidadeListView() {
         renderItem={renderItem}
         onRefresh={carregar}
         refreshing={loading}
-        ListEmptyComponent={<Text style={styles.empty}>Nenhuma conversão salva</Text>}
+        ListEmptyComponent={
+          <Text style={styles.empty}>Nenhuma conversão salva</Text>
+        }
+        contentContainerStyle={{ paddingBottom: 35 }}
       />
     </View>
   );
