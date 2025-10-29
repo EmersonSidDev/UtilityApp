@@ -12,7 +12,7 @@
     "**/Thumbs.db": true,
     "**/.expo": true,
     "**/.vs": true,
-    "**/.vscode": false,
+    "**/.vscode": true,
     "**/assets": true,
     "**/node_modules": true,
     "**/.gitignore": true,

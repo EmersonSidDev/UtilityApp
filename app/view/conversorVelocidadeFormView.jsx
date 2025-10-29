@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Card, RadioButton, Text, TextInput } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
-import ConversorVelocidadeService from '../services/conversorVelocidadeService';
+import ConversorVelocidadeService from '../services/ConversorVelocidadeService';
 
 export default function ConversorVelocidadeFormView() {
   const router = useRouter();
