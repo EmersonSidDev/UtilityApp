@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
-import ConversorVelocidadeService from '../services/conversorVelocidadeService';
+import ConversorPesoService from '../services/conversorPesoService';
 
-export default function ConversorVelocidadeListView() {
+export default function ConversorPesoListView() {
   const router = useRouter();
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ export default function ConversorVelocidadeListView() {
   async function carregar() {
     setLoading(true);
     try {
-      const lista = await ConversorVelocidadeService.listar();
+      const lista = await ConversorPesoService.listar();
       setDados(lista || []);
     } catch (err) {
       Toast.show({ type: 'error', text1: 'Erro ao carregar', text2: String(err?.message ?? err) });
@@ -23,13 +23,12 @@ export default function ConversorVelocidadeListView() {
   }
 
   useEffect(() => {
-    // carrega na montagem
     carregar();
   }, []);
 
   async function removerItem(id) {
     try {
-      const ok = await ConversorVelocidadeService.remover(id);
+      const ok = await ConversorPesoService.remover(id);
       if (ok) {
         Toast.show({ type: 'success', text1: 'Removido com sucesso' });
         carregar();
@@ -52,7 +51,7 @@ export default function ConversorVelocidadeListView() {
           <Button
             onPress={() =>
               router.push({
-                pathname: '/view/conversorVelocidadeFormView',
+                pathname: '/view/conversorPesoFormView',
                 params: { id: String(item.id) },
               })
             }
@@ -72,7 +71,7 @@ export default function ConversorVelocidadeListView() {
       <Button
         mode="contained"
         style={styles.btnAdd}
-        onPress={() => router.push({ pathname: '/view/conversorVelocidadeFormView' })}
+        onPress={() => router.push({ pathname: '/view/conversorPesoFormView' })}
       >
         Nova Conversão
       </Button>

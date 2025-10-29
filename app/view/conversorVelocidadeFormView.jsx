@@ -1,4 +1,3 @@
-// app/view/conversorVelocidadeFormView.jsx
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';

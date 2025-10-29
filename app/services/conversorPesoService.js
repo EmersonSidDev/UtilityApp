@@ -1,14 +1,13 @@
-import ConversaoVelocidadeEntity from "../entities/ConversaoVelocidadeEntity";
+import ConversaoPesoEntity from "../entities/ConversaoPesoEntity";
 
 const mem = []; // armazenamento em memória
 
-export default class ConversorVelocidadeService {
+export default class ConversorPesoService {
   static toEntity(d) {
-    return ConversaoVelocidadeEntity.fromDto(d);
+    return ConversaoPesoEntity.fromDto(d);
   }
 
   static async listar() {
-    // retorna cópias mapeadas como entidades
     return mem.map(this.toEntity);
   }
 
@@ -19,12 +18,8 @@ export default class ConversorVelocidadeService {
 
   static validar(dto) {
     const erros = [];
-    if (dto === null || dto === undefined) erros.push("Dados inválidos");
-    if (dto.valor === undefined || dto.valor === null || Number.isNaN(Number(dto.valor))) {
-      erros.push("Valor deve ser um número");
-    } else if (Number(dto.valor) < 0) {
-      erros.push("Valor não pode ser negativo");
-    }
+    if (!dto.valor || Number.isNaN(Number(dto.valor))) erros.push("Valor deve ser um número válido");
+    if (Number(dto.valor) < 0) erros.push("Valor não pode ser negativo");
     if (!dto.unidadeOrigem) erros.push("Unidade de origem é obrigatória");
     if (!dto.unidadeDestino) erros.push("Unidade de destino é obrigatória");
     if (dto.unidadeOrigem === dto.unidadeDestino) erros.push("Unidades devem ser diferentes");
@@ -35,7 +30,7 @@ export default class ConversorVelocidadeService {
     this.validar(dto);
     const entity = this.toEntity({
       ...dto,
-      id: dto.id ?? `cv_${Date.now()}`,
+      id: dto.id ?? `cp_${Date.now()}`,
       resultado: dto.resultado ?? 0,
       data: dto.data ?? new Date().toISOString().slice(0, 10),
     });
