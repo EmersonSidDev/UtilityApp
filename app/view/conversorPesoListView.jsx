@@ -1,40 +1,34 @@
-import { useFocusEffect, useRouter } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useRouter } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
-import ConversorVelocidadeService from '../services/conversorVelocidadeService';
+import ConversorPesoService from '../services/conversorPesoService';
 
-export default function ConversorVelocidadeListView() {
+export default function ConversorPesoListView() {
   const router = useRouter();
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const carregar = useCallback(async () => {
+  async function carregar() {
     setLoading(true);
     try {
-      const lista = await ConversorVelocidadeService.listar();
+      const lista = await ConversorPesoService.listar();
       setDados(lista || []);
     } catch (err) {
-      Toast.show({
-        type: 'error',
-        text1: 'Erro ao carregar',
-        text2: String(err?.message ?? err),
-      });
+      Toast.show({ type: 'error', text1: 'Erro ao carregar', text2: String(err?.message ?? err) });
     } finally {
       setLoading(false);
     }
-  }, []);
+  }
 
-  useFocusEffect(
-    useCallback(() => {
-      carregar();
-    }, [carregar])
-  );
+  useEffect(() => {
+    carregar();
+  }, []);
 
   async function removerItem(id) {
     try {
-      const ok = await ConversorVelocidadeService.remover(id);
+      const ok = await ConversorPesoService.remover(id);
       if (ok) {
         Toast.show({ type: 'success', text1: 'Removido com sucesso' });
         carregar();
@@ -42,20 +36,14 @@ export default function ConversorVelocidadeListView() {
         Toast.show({ type: 'error', text1: 'Item não encontrado' });
       }
     } catch (err) {
-      Toast.show({
-        type: 'error',
-        text1: 'Erro ao remover',
-        text2: String(err?.message ?? err),
-      });
+      Toast.show({ type: 'error', text1: 'Erro ao remover', text2: String(err?.message ?? err) });
     }
   }
 
   function renderItem({ item }) {
     return (
       <Card style={styles.card}>
-        <Card.Title
-          title={`${Number(item.valor).toFixed(2)} ${item.unidadeOrigem} → ${Number(item.resultado).toFixed(2)} ${item.unidadeDestino}`}
-        />
+        <Card.Title title={`${item.valor} ${item.unidadeOrigem} → ${item.resultado} ${item.unidadeDestino}`} />
         <Card.Content>
           <Text>Data: {item.data}</Text>
         </Card.Content>
@@ -63,7 +51,7 @@ export default function ConversorVelocidadeListView() {
           <Button
             onPress={() =>
               router.push({
-                pathname: '/view/conversorVelocidadeFormView',
+                pathname: '/view/conversorPesoFormView',
                 params: { id: String(item.id) },
               })
             }
@@ -83,9 +71,7 @@ export default function ConversorVelocidadeListView() {
       <Button
         mode="contained"
         style={styles.btnAdd}
-        onPress={() =>
-          router.push({ pathname: '/view/conversorVelocidadeFormView' })
-        }
+        onPress={() => router.push({ pathname: '/view/conversorPesoFormView' })}
       >
         Nova Conversão
       </Button>
@@ -96,10 +82,7 @@ export default function ConversorVelocidadeListView() {
         renderItem={renderItem}
         onRefresh={carregar}
         refreshing={loading}
-        ListEmptyComponent={
-          <Text style={styles.empty}>Nenhuma conversão salva</Text>
-        }
-        contentContainerStyle={{ paddingBottom: 35 }}
+        ListEmptyComponent={<Text style={styles.empty}>Nenhuma conversão salva</Text>}
       />
     </View>
   );

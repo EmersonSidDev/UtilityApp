@@ -1,4 +1,3 @@
-// app/index.jsx
 import { router } from 'expo-router';
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
@@ -27,11 +26,31 @@ export default function Index() {
           <Button
             mode="contained"
             style={styles.button}
-            onPress={() =>
-              router.push('/view/conversorVelocidadeListView')
-            }
+            onPress={() => router.push('/view/conversorVelocidadeListView')}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.buttonLabel}
           >
             🚀 Conversor de Velocidade
+          </Button>
+
+          <Button
+            mode="contained"
+            style={[styles.button, styles.weightButton]}
+            onPress={() => router.push('/view/conversorPesoListView')}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.buttonLabel}
+          >
+            ⚖️ Conversor de Peso
+          </Button>
+
+          <Button
+            mode="contained"
+            style={[styles.button, styles.weightButton]}
+            onPress={() => router.push('/view/cronometroView')}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.buttonLabel}
+          >
+            Cronômetro
           </Button>
         </Card.Content>
       </Card>
@@ -82,8 +101,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
+    width: '80%',              
     borderRadius: 12,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    marginVertical: 6,
+    backgroundColor: '#c4a2ff',
+  },
+  weightButton: {
+    backgroundColor: '#a48bff',
+  },
+  buttonContent: {
+    height: 48,                
+  },
+  buttonLabel: {
+    fontSize: 15,
+    fontWeight: '600',
   },
 });
