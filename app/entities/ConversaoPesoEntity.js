@@ -3,25 +3,25 @@ function normalizeId(raw) {
   return String(raw);
 }
 function newId() {
-  return `cv_${Date.now()}`;
+  return `cp_${Date.now()}`;
 }
 
 /**
- * Entidade que representa uma conversão de velocidade
+ * Entidade que representa uma conversão de peso
  * Campos:
  *  - id: string
- *  - valor: number (valor original)
- *  - unidadeOrigem: string ('m/s' | 'km/h' | 'mph')
- *  - unidadeDestino: string ('m/s' | 'km/h' | 'mph')
- *  - resultado: number (valor convertido)
+ *  - valor: number
+ *  - unidadeOrigem: string ('kg' | 'g' | 'lb' | 'oz')
+ *  - unidadeDestino: string ('kg' | 'g' | 'lb' | 'oz')
+ *  - resultado: number
  *  - data: string 'YYYY-MM-DD'
  */
-export default class ConversaoVelocidadeEntity {
+export default class ConversaoPesoEntity {
   constructor({
     id = null,
     valor = 0,
-    unidadeOrigem = 'm/s',
-    unidadeDestino = 'km/h',
+    unidadeOrigem = 'kg',
+    unidadeDestino = 'g',
     resultado = 0,
     data = null,
   } = {}) {
@@ -30,12 +30,11 @@ export default class ConversaoVelocidadeEntity {
     this.unidadeOrigem = unidadeOrigem;
     this.unidadeDestino = unidadeDestino;
     this.resultado = Number(resultado) || 0;
-    // garantir formato YYYY-MM-DD
     this.data = data ? String(data) : new Date().toISOString().slice(0, 10);
   }
 
   static fromDto(d) {
-    return d ? new ConversaoVelocidadeEntity(d) : null;
+    return d ? new ConversaoPesoEntity(d) : null;
   }
 
   get key() {
