@@ -1,3 +1,4 @@
+// app/components/topMenu.jsx
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Appbar, Menu } from 'react-native-paper';
@@ -8,19 +9,12 @@ export default function TopMenu() {
   const closeMenu = () => setVisible(false);
 
   return (
-    <Appbar.Header style={{ backgroundColor: 'black' }}>
-      <Appbar.Content title="Início" color="white" />
+    <Appbar.Header>
+      <Appbar.Content title="Início" />
       <Menu
         visible={visible}
         onDismiss={closeMenu}
-        anchor={
-          <Appbar.Action
-            icon="menu"
-            color="white"
-            onPress={openMenu}
-          />
-        }
-        contentStyle={{ backgroundColor: '#1a1a1a' }}
+        anchor={<Appbar.Action icon="menu" color="white" onPress={openMenu} />}
       >
         <Menu.Item
           onPress={() => {
@@ -28,24 +22,23 @@ export default function TopMenu() {
             router.push('/');
           }}
           title="🏠 Início"
-          titleStyle={{ color: 'white' }}
         />
         <Menu.Item
           onPress={() => {
             closeMenu();
             router.push('/view/conversorVelocidadeListView');
           }}
-          title="🚗 Conversor de Velocidade"
-          titleStyle={{ color: 'white' }}
+          title="⚙️ Conversor de Velocidade"
         />
-      <Menu.Item
-  onPress={() => {
-    closeMenu();
-    router.push('/view/conversorPesoListView');
-  }}
-  title="⚖️ Conversor de Peso"
-  titleStyle={{ color: 'white' }}
-/>      </Menu>
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
+            router.push('/view/conversorMedidaListView');
+          }}
+          title="📏 Conversor de Medida"
+        />
+      </Menu>
+        
     </Appbar.Header>
   );
 }
