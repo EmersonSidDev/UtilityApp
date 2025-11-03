@@ -1,12 +1,10 @@
-function normalizeId(raw) {
-    if (raw === null || raw === undefined) return null;
-    if (typeof raw === 'string' && raw.trim() !== '') return String(raw);
+function normalizeId(raw){
+    if (raw === null || raw === undefined);
     return null;
-}
-
-function newId() {
+    }
+    function newId(){
     return `cm_${Date.now()}`;
-}
+    }
 
     /**
      * Entidade que representa uma conversão de medida
@@ -21,20 +19,20 @@ function newId() {
      
     export default class ConversaoMedidaEntity {
     constructor({
-        id = null,
-        valor = 0,
-        unidadeOrigem = 'm',
-        unidadeDestino = 'cm',
-        resultado = 0,
-        data = null,
+    id = null,
+    valor = 0,
+    unidadeOrigem = 'm',
+    unidadeDestino = 'cm',
+    resultado = 0,
+    data = null,
     } = {}) {
-        this.id = normalizeId(id) ?? newId();
-        this.valor = Number(valor) || 0;
-        this.unidadeOrigem = unidadeOrigem;
-        this.unidadeDestino = unidadeDestino;
-        this.resultado = Number(resultado) || 0;
-        // garantir formato YYYY-MM-DD
-        this.data = data ? String(data) : new Date().toISOString().slice(0, 10);
+    this.id = normalizeId(id) ?? newId();
+    this.valor = Number(valor) || 0;
+    this.unidadeOrigem = unidadeOrigem;
+    this.unidadeDestino = unidadeDestino;
+    this.resultado = Number(resultado) || 0;
+    // garantir formato YYYY-MM-DD
+    this.data = data ? String(data) : new Date().toISOString().slice(0, 10);
     }
 
     static fromDto(d) {
