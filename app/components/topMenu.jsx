@@ -48,11 +48,20 @@ export default function TopMenu() {
         <Menu.Item
           onPress={() => {
             closeMenu();
+            router.push('/view/conversorTempoListView');
+          }}
+          title="⏳ Conversor de Tempo"
+          titleStyle={{ color: 'white' }}
+        />
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
             router.push('/view/cronometroView');
           }}
           title="⏱️ Cronômetro"
           titleStyle={{ color: 'white' }}
         />
+
       </Menu>
         
     </Appbar.Header>

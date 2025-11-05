@@ -53,6 +53,16 @@ export default function Index() {
           >
             📏 Conversor de Medida
           </Button>
+          
+          <Button
+            mode="contained"
+            style={[styles.button]}
+            onPress={() =>
+              router.push('/view/conversorTempoListView')
+            }
+          >
+            ⏳ Conversor de Tempo
+          </Button>
 
           <Button
             mode="contained"
