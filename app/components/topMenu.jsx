@@ -1,6 +1,6 @@
 // app/components/topMenu.jsx
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Appbar, Menu } from 'react-native-paper';
 
 export default function TopMenu() {
@@ -29,6 +29,13 @@ export default function TopMenu() {
             router.push('/view/conversorVelocidadeListView');
           }}
           title="⚙️ Conversor de Velocidade"
+        />
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
+            router.push('/view/ImcListView');
+          }}
+          title="Calculadora de IMC"
         />
       </Menu>
     </Appbar.Header>
