@@ -46,7 +46,7 @@ export default function Index() {
           <Button
             mode="contained"
             style={[styles.button, styles.weightButton]}
-            onPress={() => router.push('/view/cronometroView')}
+            onPress={() => router.push('/view/cronometroFormView')}
             contentStyle={styles.buttonContent}
             labelStyle={styles.buttonLabel}
           >
