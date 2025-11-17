@@ -30,6 +30,13 @@ export default function TopMenu() {
           }}
           title="⚙️ Conversor de Velocidade"
         />
+                <Menu.Item
+          onPress={() => {
+            closeMenu();
+            router.push('/view/conversorTemperaturaListView');
+          }}
+          title="⚙️ Conversor de Temperatura"
+        />
       </Menu>
     </Appbar.Header>
   );
