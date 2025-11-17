@@ -56,7 +56,7 @@ export default function TopMenu() {
         <Menu.Item
           onPress={() => {
             closeMenu();
-            router.push('/view/cronometroView');
+            router.push('/view/cronometroFormView');
           }}
           title="⏱️ Cronômetro"
           titleStyle={{ color: 'white' }}
