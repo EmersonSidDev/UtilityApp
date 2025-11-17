@@ -90,6 +90,8 @@ O projeto foi desenvolvido de forma colaborativa, com cada integrante responsáv
 * **Expo Router** para navegação
 * **AsyncStorage** para persistência local
 * **React Native Paper** e componentes estilizados
+* **Linguagens** JavaScript; JSX; JSON
+* **ChatGPT** como ferramenta de suporte para auxílio na elaboração, organização de código e apoio técnico durante o desenvolvimento.
 
 ---
 
