@@ -1,50 +1,129 @@
-# Welcome to your Expo app 👋
+# Utility App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+O **Utility App** é um aplicativo mobile desenvolvido em **React Native com Expo** voltado para facilitar o dia a dia do usuário oferecendo diversas ferramentas úteis em um só lugar. O projeto foi desenvolvido como trabalho da disciplina **Programação para Dispositivos Móveis**.
 
-## Get started
+## 📱 Objetivo do Aplicativo
 
-1. Install dependencies
+O objetivo do Utility App é reunir funcionalidades essenciais que auxiliam o usuário em cálculos e conversões rápidas, como:
 
-   ```bash
-   npm install
-   ```
+* Conversão de velocidade
+* Conversão de metragem
+* Conversão de peso
+* Conversão de temperatura
+* Conversão de tempo
+* Cronômetro
+* Calculadora de IMC
 
-2. Start the app
+O aplicativo continua em expansão e pode receber novas funcionalidades futuramente.
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🗂️ Estrutura do Projeto
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+O projeto segue uma estrutura modular, separando componentes, serviços, entidades e telas:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/
+  _layout.jsx
+  index.jsx
+  components/
+    bottomMenu.jsx
+    topMenu.jsx
+  entities/
+    xxxEntity.js
+  services/
+    xxxService.js
+  view/
+    xxxFormView.jsx
+    xxxListView.jsx
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Cada funcionalidade é organizada em uma View própria e, quando necessário, possui uma Entity e um Service responsável pela lógica de processamento e persistência.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+## 💾 Persistência de Dados
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+O Utility App utiliza armazenamento interno para salvar conversões e informações relevantes. Cada módulo possui seu próprio service responsável pela leitura e escrita dos dados.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 👥 Integrantes e suas Responsabilidades
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+O projeto foi desenvolvido de forma colaborativa, com cada integrante responsável por uma funcionalidade específica:
+
+### **Arthur Fernandes Silva Araújo**
+
+* Conversor de Peso
+
+### **Daniel Silva De Oliveira**
+
+* Cronômetro
+
+### **David Silva Ferreira**
+
+* Conversor de Temperatura
+
+### **Douglas Coimbra Laass**
+
+* Conversor de Tempo
+
+### **Emerson Carlos de Araújo Junior**
+
+* Base do aplicativo (estrutura geral)
+* Conversor de Velocidade
+* Mesclagem das 'Branchs' no Git
+
+### **Thiago Deones Jesus Dutra Alves**
+
+* Conversor de Metragem
+
+### **Thomas Cesar Felicissimo Mendes**
+
+* Calculadora de IMC
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+* **React Native** (Expo)
+* **Expo Router** para navegação
+* **AsyncStorage** para persistência local
+* **React Native Paper** e componentes estilizados
+
+---
+
+## 🧩 Funcionalidades Implementadas
+
+* Interface inicial com apresentação do aplicativo
+* Menu superior e inferior para navegação
+* Conversores completos
+* Salvar histórico de conversões
+* Edição e exclusão de registros
+* Layout responsivo e intuitivo
+
+---
+
+## 📦 Como Executar o Projeto
+
+1. Instale as dependências:
+
+```
+npm install
+```
+
+2. Execute o app:
+
+```
+npx expo start
+```
+
+3. Escaneie o QR Code no Expo Go ou rode em um emulador.
+
+---
+
+## 📌 Considerações Finais
+
+O Utility App foi desenvolvido com foco em organização, boas práticas e modularização. O projeto pode ser expandido com novas ferramentas e melhorias visuais.
+
+Sinta-se livre para contribuir ou adaptar o código!
