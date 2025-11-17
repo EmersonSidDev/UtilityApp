@@ -12,6 +12,22 @@ export default function ConversorMedidaListView() {
 	const [dados, setDados] = useState([]);
 	const [loading, setLoading] = useState(false);
 
+	// mapeamento de siglas para nomes completos
+	const unidadeNomes = {
+		m: 'Metro',
+		cm: 'Centímetro',
+		mm: 'Milímetro',
+		km: 'Quilômetro',
+		in: 'Polegada',
+		ft: 'Pé',
+		yd: 'Jarda',
+		mi: 'Milha',
+	};
+
+	function getNomeDaUnidade(sigla) {
+		return unidadeNomes[sigla] ?? sigla;
+	}
+
 	async function carregar() {
 		setLoading(true);
 		try {
@@ -45,7 +61,7 @@ export default function ConversorMedidaListView() {
 	function renderItem({ item }) {
 		return (
 			<Card style={styles.card}>
-				<Card.Title title={`${item.valor} ${item.unidadeOrigem} → ${item.resultado} ${item.unidadeDestino}`} />
+				<Card.Title title={`${item.valor} ${getNomeDaUnidade(item.unidadeOrigem)} → ${item.resultado.toFixed(2)} ${getNomeDaUnidade(item.unidadeDestino)}`} />
 				<Card.Content>
 					<Text>Data: {item.data}</Text>
 				</Card.Content>

@@ -12,6 +12,22 @@ export default function ConversorMedidaFormView() {
 
   const unidades = ['m', 'cm', 'mm', 'km', 'in', 'ft', 'yd', 'mi'];
 
+  // mapeamento de siglas para nomes completos
+  const unidadeNomes = {
+    m: 'Metro',
+    cm: 'Centímetro',
+    mm: 'Milímetro',
+    km: 'Quilômetro',
+    in: 'Polegada',
+    ft: 'Pé',
+    yd: 'Jarda',
+    mi: 'Milha',
+  };
+
+  function getNomeDaUnidade(sigla) {
+    return unidadeNomes[sigla] ?? sigla;
+  }
+
   const [valor, setValor] = useState('');
   const [unidadeOrigem, setUnidadeOrigem] = useState('m');
   const [unidadeDestino, setUnidadeDestino] = useState('cm');
@@ -70,7 +86,7 @@ export default function ConversorMedidaFormView() {
       const m = toMeters(v, unidadeOrigem);
       const res = fromMeters(m, unidadeDestino);
       setResultado(res);
-      Toast.show({ type: 'success', text1: 'Conversão realizada', text2: `${v} ${unidadeOrigem} → ${res.toFixed(4)} ${unidadeDestino}` });
+      Toast.show({ type: 'success', text1: 'Conversão realizada', text2: `${v} ${unidadeOrigem} → ${res.toFixed(2)} ${unidadeDestino}` });
       return res;
     } catch (err) {
       Toast.show({ type: 'error', text1: 'Erro', text2: String(err?.message ?? err) });
@@ -123,7 +139,7 @@ export default function ConversorMedidaFormView() {
                 {unidades.map(u => (
                   <View style={styles.radioRow} key={u}>
                     <RadioButton value={u} />
-                    <Text>{u}</Text>
+                    <Text>{getNomeDaUnidade(u)}</Text>
                   </View>
                 ))}
               </RadioButton.Group>
@@ -135,7 +151,7 @@ export default function ConversorMedidaFormView() {
                 {unidades.map(u => (
                   <View style={styles.radioRow} key={u}>
                     <RadioButton value={u} />
-                    <Text>{u}</Text>
+                    <Text>{getNomeDaUnidade(u)}</Text>
                   </View>
                 ))}
               </RadioButton.Group>
@@ -145,7 +161,7 @@ export default function ConversorMedidaFormView() {
           <Button mode="contained" onPress={calcular} style={styles.btn}>Calcular</Button>
 
           <Text style={styles.resultado}>
-            Resultado: {resultado !== null ? `${resultado.toFixed(4)} ${unidadeDestino}` : '—'}
+            Resultado: {resultado !== null ? `${resultado.toFixed(2)} ${getNomeDaUnidade(unidadeDestino)}` : '—'}
           </Text>
 
           <View style={styles.actions}>
