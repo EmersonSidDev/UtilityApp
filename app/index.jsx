@@ -67,11 +67,31 @@ export default function Index() {
           <Button
             mode="contained"
             style={[styles.button, styles.weightButton]}
-            onPress={() => router.push('/view/cronometroFormView')}
+            onPress={() => router.push('/view/conversorTemperaturaListView')}
             contentStyle={styles.buttonContent}
             labelStyle={styles.buttonLabel}
           >
-            Cronômetro
+            🌡️ Conversor de Temperatura
+          </Button>
+
+          <Button
+            mode="contained"
+            style={[styles.button, styles.weightButton]}
+            onPress={() => router.push('/view/cronometroListView')}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.buttonLabel}
+          >
+            ⏱️ Cronômetro
+          </Button>
+
+          <Button
+            mode="contained"
+            style={[styles.button, styles.weightButton]}
+            onPress={() => router.push('/view/ImcListView')}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.buttonLabel}
+          >
+            💪 Calculadora de IMC
           </Button>
         </Card.Content>
       </Card>

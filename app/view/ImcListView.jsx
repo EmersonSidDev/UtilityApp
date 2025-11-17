@@ -55,7 +55,7 @@ export default function ImcListView() {
           <Button
             onPress={() =>
               router.push({
-                pathname: '/view/imcFormView',
+                pathname: '/view/ImcFormView',
                 params: { id: String(item.id) },
               })
             }
@@ -75,7 +75,7 @@ export default function ImcListView() {
       <Button
         mode="contained"
         style={styles.btnAdd}
-        onPress={() => router.push({ pathname: '/view/imcFormView' })}
+        onPress={() => router.push({ pathname: '/view/ImcFormView' })}
       >
         Novo IMC
       </Button>

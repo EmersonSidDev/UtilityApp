@@ -28,7 +28,7 @@ export default function TopMenu() {
             closeMenu();
             router.push('/view/conversorVelocidadeListView');
           }}
-          title="⚙️ Conversor de Velocidade"
+          title="🚀 Conversor de Velocidade"
         />
         <Menu.Item
           onPress={() => {
@@ -36,7 +36,6 @@ export default function TopMenu() {
             router.push('/view/conversorPesoListView');
           }}
           title="⚖️ Conversor de Peso"
-          titleStyle={{ color: 'white' }}
         />
         <Menu.Item
           onPress={() => {
@@ -51,15 +50,27 @@ export default function TopMenu() {
             router.push('/view/conversorTempoListView');
           }}
           title="⏳ Conversor de Tempo"
-          titleStyle={{ color: 'white' }}
         />
         <Menu.Item
           onPress={() => {
             closeMenu();
-            router.push('/view/cronometroFormView');
+            router.push('/view/conversorTemperaturaListView');
+          }}
+          title="🌡️ Conversor de Temperatura"
+        />
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
+            router.push('/view/cronometroListView');
           }}
           title="⏱️ Cronômetro"
-          titleStyle={{ color: 'white' }}
+        />
+        <Menu.Item
+          onPress={() => {
+            closeMenu();
+            router.push('/view/ImcListView');
+          }}
+          title="💪 Calculadora de IMC"
         />
 
       </Menu>
