@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Card, Text, TextInput } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
-import ImcService from '../services/imcService';
+import ImcService from '../services/ImcService';
 
 export default function ImcFormView() {
   const router = useRouter();

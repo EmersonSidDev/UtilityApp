@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
-import ImcService from '../services/imcService';
+import ImcService from '../services/ImcService';
 
 export default function ImcListView() {
   const router = useRouter();
