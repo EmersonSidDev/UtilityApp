@@ -35,6 +35,14 @@ export default class ConversorMedidaService {
                 return n / 100;
             case 'mm':
                 return n / 1000;
+            case 'in':
+                return n * 0.0254;
+            case 'ft':
+                return n * 0.3048;
+            case 'yd':
+                return n * 0.9144;
+            case 'mi':
+                return n * 1609.344;
             default:
                 return n; // m
         }
@@ -50,6 +58,14 @@ export default class ConversorMedidaService {
                 return n * 100;
             case 'mm':
                 return n * 1000;
+            case 'in':
+                return n / 0.0254;
+            case 'ft':
+                return n / 0.3048;
+            case 'yd':
+                return n / 0.9144;
+            case 'mi':
+                return n / 1609.344;
             default:
                 return n; // m
         }
@@ -75,6 +91,12 @@ export default class ConversorMedidaService {
     static async listar() {
         await this._readStorage();
         return (mem || []).map(this.toEntity);
+    }
+
+    static async buscarPorId(id) {
+        await this._readStorage();
+        const raw = (mem || []).find(x => String(x.id) === String(id));
+        return raw ? this.toEntity(raw) : null;
     }
 
     // validação
