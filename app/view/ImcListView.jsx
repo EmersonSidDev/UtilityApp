@@ -87,6 +87,7 @@ export default function ImcListView() {
         onRefresh={carregar}
         refreshing={loading}
         ListEmptyComponent={<Text style={styles.empty}>Nenhum cálculo de IMC salvo</Text>}
+        contentContainerStyle={{ paddingBottom: 35 }}
       />
     </View>
   );

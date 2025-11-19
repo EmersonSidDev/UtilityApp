@@ -3,8 +3,8 @@ import { useCallback, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Card, FAB, Text } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
+import { formatNumber, tempoDecimals } from '../config/format';
 import ConversorTempoService from '../services/ConversorTempoService';
-import { tempoDecimals, formatNumber } from '../config/format';
 
 
 // Tela de listagem das conversões de tempo realizadas
@@ -55,6 +55,7 @@ export default function ConversorTempoListView() {
           </Card>
         )}
         ListEmptyComponent={<Text style={styles.vazio}>Nenhuma conversão registrada.</Text>}
+        contentContainerStyle={{ paddingBottom: 35 }}
       />
 
       <FAB

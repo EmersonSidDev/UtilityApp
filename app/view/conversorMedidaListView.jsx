@@ -101,6 +101,7 @@ export default function ConversorMedidaListView() {
 				onRefresh={carregar}
 				refreshing={loading}
 				ListEmptyComponent={<Text style={styles.empty}>Nenhuma conversão salva</Text>}
+        contentContainerStyle={{ paddingBottom: 35 }}
 			/>
 		</View>
 	);

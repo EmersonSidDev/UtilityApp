@@ -69,7 +69,7 @@ export default function CronometroListView() {
         refreshing={loading}
         onRefresh={carregar}
         ListEmptyComponent={<Text style={styles.empty}>Nenhum histórico salvo</Text>}
-        contentContainerStyle={{ paddingBottom: 40 }}
+        contentContainerStyle={{ paddingBottom: 35 }}
       />
     </View>
   );
